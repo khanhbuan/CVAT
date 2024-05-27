@@ -121,8 +121,8 @@ class OrganizationViewSet(viewsets.GenericViewSet,
             '204': OpenApiResponse(description='The membership has been deleted'),
         })
 )
-class MembershipViewSet(mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
-    mixins.ListModelMixin, PartialUpdateModelMixin, viewsets.GenericViewSet):
+class MembershipViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
+    mixins.ListModelMixin, PartialUpdateModelMixin):
     queryset = Membership.objects.select_related('invitation', 'user').all()
     ordering = '-id'
     http_method_names = ['get', 'patch', 'delete', 'head', 'options']
